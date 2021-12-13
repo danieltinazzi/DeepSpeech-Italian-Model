@@ -5,11 +5,12 @@ rm Makefile Dockerfile.train.tmpl
 wget https://github.com/mozilla/DeepSpeech/raw/$DS_SHA/Makefile
 wget https://github.com/mozilla/DeepSpeech/raw/$DS_SHA/Dockerfile.train.tmpl
 
-# install libmagic
-sed -i '/libbz2-dev/a \\tlibmagic-dev \\' Dockerfile.train.tmpl
+# install libmagic and sox
+sed -i '/libbz2-dev/a\\tlibmagic-dev \\\n\tsox \\' Dockerfile.train.tmpl
 
-# fix swig url
+# fix m-ailabs and swig url
 sed -i "/^RUN git checkout \$DEEPSPEECH_SHA/a \
+RUN sed -i 's|http://www.caito.de|https://data.solak.de|' bin/import_m-ailabs.py\n\
 RUN sed -i 's|swig/4.0.2|swig/4.1.0|' native_client/definitions.mk\n\
 RUN sed -i -E 's|community-tc.*swig(.*)amd64.*tar|github.com/mozilla/DeepSpeech/releases/download/v0.9.3/ds-swig\\\1amd64.tar|g' native_client/definitions.mk" \
 Dockerfile.train.tmpl
