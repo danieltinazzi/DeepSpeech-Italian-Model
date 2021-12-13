@@ -9,7 +9,7 @@ pushd $DS_DIR
 	fi;
 
 	if [ ! -f "/mnt/extracted/data/cv-it/clips/train.csv" ]; then
-        if ! echo "a304332d1dfdb772ae75859441f46a88438305d2f5420680c3c64fba62ea6830  /mnt/sources/it.tar.gz" | sha256sum --check; then
+        if ! echo "c2ccf746740c0ca0e4cf2f57e9b749a2c8574d0828e6ba73c34e921136fef91b /mnt/sources/it.tar.gz" | sha256sum --check; then
             echo "Invalid Common Voice IT dataset"
             exit 1
         fi;
